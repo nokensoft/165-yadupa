@@ -1,0 +1,58 @@
+<section id="blog" class="py-32 bg-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div class="space-y-4">
+                <h2 class="text-5xl font-black text-papua-brown uppercase italic tracking-tighter">Blog & Catatan</h2>
+                <div class="w-24 h-3 bg-papua-gold rounded-full"></div>
+            </div>
+            <a href="#" class="text-lg font-black text-papua-brown uppercase tracking-widest hover:translate-x-2 transition-transform inline-flex items-center">
+                BACA LAINNYA <i class="fas fa-arrow-right ml-3 text-papua-red"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            {{-- Featured Post --}}
+            <div class="lg:col-span-7 group cursor-pointer">
+                <div class="relative h-[500px] md:h-[600px] rounded-[3rem] overflow-hidden shadow-2xl border border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-papua-black/90 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-12">
+                        <span class="bg-papua-red text-white px-6 py-2 rounded-full text-sm font-black uppercase mb-4 inline-block">Perspektif</span>
+                        <h3 class="text-4xl font-black text-white leading-tight">Esai: Pentingnya Literasi Kontekstual di Tengah Modernisasi Dusun.</h3>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Side Posts --}}
+            <div class="lg:col-span-5 flex flex-col gap-8">
+                <div class="flex gap-6 group cursor-pointer items-center">
+                    <div class="w-32 h-32 shrink-0 rounded-3xl overflow-hidden shadow-lg border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-xs font-black text-papua-red uppercase tracking-widest">Budaya</span>
+                        <h4 class="text-xl font-black leading-tight group-hover:text-papua-brown transition">Mengenal Tradisi Lisan Sebagai Penjaga Hutan.</h4>
+                    </div>
+                </div>
+                <div class="flex gap-6 group cursor-pointer items-center">
+                    <div class="w-32 h-32 shrink-0 rounded-3xl overflow-hidden shadow-lg border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-xs font-black text-papua-red uppercase tracking-widest">Advokasi</span>
+                        <h4 class="text-xl font-black leading-tight group-hover:text-papua-brown transition">Tantangan Masyarakat Adat di Era Digital.</h4>
+                    </div>
+                </div>
+                <div class="flex gap-6 group cursor-pointer items-center">
+                    <div class="w-32 h-32 shrink-0 rounded-3xl overflow-hidden shadow-lg border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-xs font-black text-papua-red uppercase tracking-widest">Opini</span>
+                        <h4 class="text-xl font-black leading-tight group-hover:text-papua-brown transition">Mengapa Dusun adalah Pusat Peradaban Papua.</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

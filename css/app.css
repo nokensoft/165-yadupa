@@ -1,0 +1,12 @@
+.shape-dots {
+    background-image: radial-gradient(#D2691E 2px, transparent 2px);
+    background-size: 24px 24px;
+}
+
+body {
+    font-size: 1.125rem;
+}
+
+[x-cloak] {
+    display: none !important;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YADUPA | Yayasan Anak Dusun Papua</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="public/img/logo-yadupa.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="public/img/logo-yadupa.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,700;0,800;1,800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/blade.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        'papua-brown': '#A0522D',
+                        'papua-gold': '#FFD700',
+                        'papua-red': '#D2691E',
+                        'papua-black': '#1A1A1A'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body class="bg-white font-sans antialiased text-gray-800 leading-relaxed overflow-x-hidden">
+
+    <!-- Loading Screen with Logo -->
+    <div id="loading" class="fixed inset-0 z-[999] bg-white flex flex-col items-center justify-center transition-opacity duration-500">
+        <img src="public/img/logo-yadupa.png" alt="YADUPA Logo" class="w-28 h-28 rounded-3xl animate-pulse mb-6">
+        <span class="text-3xl font-black text-papua-brown uppercase tracking-tighter italic">YADUPA</span>
+        <p class="text-sm text-gray-400 mt-2 tracking-widest uppercase">Yayasan Anak Dusun Papua</p>
+    </div>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const el = document.getElementById('loading')
+                el.style.opacity = '0'
+                setTimeout(() => el.remove(), 500)
+            }, 800)
+        })
+    </script>
+
+    <!-- @include('partials.header') -->
+    <div x-data x-include="partials.header"></div>
+
+    <!-- @yield('content') → pages/home -->
+    <main>
+        <!-- @include('sections.hero') -->
+        <div x-data x-include="sections.hero"></div>
+
+        <!-- @include('sections.about') -->
+        <div x-data x-include="sections.about"></div>
+
+        <!-- @include('sections.blog') -->
+        <div x-data x-include="sections.blog"></div>
+
+        <!-- @include('sections.cta') -->
+        <div x-data x-include="sections.cta"></div>
+    </main>
+
+    <!-- @include('partials.footer') -->
+    <div x-data x-include="partials.footer"></div>
+
+</body>
+</html>

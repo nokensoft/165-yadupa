@@ -1,0 +1,138 @@
+<!-- Page Hero -->
+<section class="pt-40 pb-20 bg-gray-50 relative overflow-hidden">
+    <div class="absolute top-20 right-10 w-64 h-64 bg-papua-gold/10 rounded-full blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-6">
+        <p class="text-sm font-black text-papua-red uppercase tracking-[0.3em] mb-4">Blog & Catatan</p>
+        <h1 class="text-5xl md:text-7xl font-black text-papua-brown uppercase italic leading-tight tracking-tighter">Cerita Dari Dusun</h1>
+        <div class="w-24 h-3 bg-papua-gold rounded-full mt-6"></div>
+    </div>
+</section>
+
+<!-- Blog Content -->
+<section class="py-24 bg-white" x-data="{ search: '', activeCategory: 'Semua' }">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row gap-16">
+
+            <!-- Posts Grid (2 Kolom) -->
+            <div class="w-full lg:w-2/3">
+                <h2 class="text-2xl font-black text-papua-brown uppercase mb-8 tracking-wider">Postingan Terbaru</h2>
+                <div class="grid md:grid-cols-2 gap-10">
+
+                    <!-- Post 1 -->
+                    <article class="group cursor-pointer">
+                        <div class="h-56 rounded-3xl overflow-hidden shadow-lg border border-gray-100 mb-5 bg-papua-brown/5 flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <span class="text-xs font-black text-papua-red uppercase tracking-widest">Perspektif</span>
+                        <h3 class="text-xl font-black mt-2 leading-tight group-hover:text-papua-brown transition">Pentingnya Literasi Kontekstual di Tengah Modernisasi Dusun</h3>
+                        <p class="text-gray-500 mt-3 text-base leading-relaxed">Bagaimana pendidikan yang berbasis budaya lokal menjadi kunci keberlanjutan masyarakat adat di era digital.</p>
+                        <p class="text-sm text-gray-400 mt-3 font-bold">25 Maret 2026</p>
+                    </article>
+
+                    <!-- Post 2 -->
+                    <article class="group cursor-pointer">
+                        <div class="h-56 rounded-3xl overflow-hidden shadow-lg border border-gray-100 mb-5 bg-papua-brown/5 flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <span class="text-xs font-black text-papua-red uppercase tracking-widest">Budaya</span>
+                        <h3 class="text-xl font-black mt-2 leading-tight group-hover:text-papua-brown transition">Mengenal Tradisi Lisan Sebagai Penjaga Hutan</h3>
+                        <p class="text-gray-500 mt-3 text-base leading-relaxed">Tradisi lisan bukan sekadar cerita — ia adalah hukum adat yang menjaga keseimbangan alam di tanah Papua.</p>
+                        <p class="text-sm text-gray-400 mt-3 font-bold">18 Maret 2026</p>
+                    </article>
+
+                    <!-- Post 3 -->
+                    <article class="group cursor-pointer">
+                        <div class="h-56 rounded-3xl overflow-hidden shadow-lg border border-gray-100 mb-5 bg-papua-brown/5 flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <span class="text-xs font-black text-papua-red uppercase tracking-widest">Advokasi</span>
+                        <h3 class="text-xl font-black mt-2 leading-tight group-hover:text-papua-brown transition">Tantangan Masyarakat Adat di Era Digital</h3>
+                        <p class="text-gray-500 mt-3 text-base leading-relaxed">Antara peluang dan ancaman: bagaimana teknologi membentuk ulang kehidupan masyarakat dusun di pedalaman.</p>
+                        <p class="text-sm text-gray-400 mt-3 font-bold">10 Maret 2026</p>
+                    </article>
+
+                    <!-- Post 4 -->
+                    <article class="group cursor-pointer">
+                        <div class="h-56 rounded-3xl overflow-hidden shadow-lg border border-gray-100 mb-5 bg-papua-brown/5 flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <span class="text-xs font-black text-papua-red uppercase tracking-widest">Opini</span>
+                        <h3 class="text-xl font-black mt-2 leading-tight group-hover:text-papua-brown transition">Mengapa Dusun Adalah Pusat Peradaban Papua</h3>
+                        <p class="text-gray-500 mt-3 text-base leading-relaxed">Dusun bukan pinggiran — ia adalah jantung kebudayaan dan pengetahuan masyarakat Papua sejak ribuan tahun.</p>
+                        <p class="text-sm text-gray-400 mt-3 font-bold">2 Maret 2026</p>
+                    </article>
+
+                    <!-- Post 5 -->
+                    <article class="group cursor-pointer">
+                        <div class="h-56 rounded-3xl overflow-hidden shadow-lg border border-gray-100 mb-5 bg-papua-brown/5 flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <span class="text-xs font-black text-papua-red uppercase tracking-widest">Laporan</span>
+                        <h3 class="text-xl font-black mt-2 leading-tight group-hover:text-papua-brown transition">Dokumentasi Pemetaan Hutan Adat Wilayah Arso</h3>
+                        <p class="text-gray-500 mt-3 text-base leading-relaxed">Proses panjang pemetaan partisipatif bersama masyarakat untuk melindungi 8.000 hektar hutan adat.</p>
+                        <p class="text-sm text-gray-400 mt-3 font-bold">20 Februari 2026</p>
+                    </article>
+
+                    <!-- Post 6 -->
+                    <article class="group cursor-pointer">
+                        <div class="h-56 rounded-3xl overflow-hidden shadow-lg border border-gray-100 mb-5 bg-papua-brown/5 flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <span class="text-xs font-black text-papua-red uppercase tracking-widest">Budaya</span>
+                        <h3 class="text-xl font-black mt-2 leading-tight group-hover:text-papua-brown transition">Noken: Lebih dari Sekadar Tas Rajutan</h3>
+                        <p class="text-gray-500 mt-3 text-base leading-relaxed">Filosofi dan makna di balik noken, warisan budaya tak benda UNESCO dari tanah Papua.</p>
+                        <p class="text-sm text-gray-400 mt-3 font-bold">10 Februari 2026</p>
+                    </article>
+
+                </div>
+            </div>
+
+            <!-- Sidebar Kanan -->
+            <aside class="w-full lg:w-1/3 space-y-10">
+
+                <!-- Search -->
+                <div class="bg-gray-50 rounded-3xl p-8">
+                    <h3 class="text-lg font-black text-papua-brown uppercase tracking-wider mb-5">Cari Artikel</h3>
+                    <div class="relative">
+                        <input x-model="search" type="text" placeholder="Ketik kata kunci..." class="w-full px-5 py-4 pr-12 rounded-2xl border-2 border-gray-200 focus:border-papua-brown focus:outline-none text-base transition">
+                        <i class="fas fa-search absolute right-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Kategori -->
+                <div class="bg-gray-50 rounded-3xl p-8">
+                    <h3 class="text-lg font-black text-papua-brown uppercase tracking-wider mb-5">Kategori</h3>
+                    <div class="space-y-3">
+                        <template x-for="cat in ['Semua', 'Perspektif', 'Budaya', 'Advokasi', 'Opini', 'Laporan']">
+                            <button @click="activeCategory = cat"
+                                    :class="activeCategory === cat ? 'bg-papua-brown text-white' : 'bg-white text-gray-600 hover:bg-gray-100'"
+                                    class="block w-full text-left px-5 py-3 rounded-xl font-bold transition text-base"
+                                    x-text="cat">
+                            </button>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Artikel Populer -->
+                <div class="bg-gray-50 rounded-3xl p-8">
+                    <h3 class="text-lg font-black text-papua-brown uppercase tracking-wider mb-5">Populer</h3>
+                    <div class="space-y-6">
+                        <a href="#" class="flex gap-4 items-center group">
+                            <span class="text-3xl font-black text-papua-gold/50 group-hover:text-papua-gold transition">01</span>
+                            <p class="font-bold text-base leading-tight group-hover:text-papua-brown transition">Pentingnya Literasi Kontekstual di Tengah Modernisasi Dusun</p>
+                        </a>
+                        <a href="#" class="flex gap-4 items-center group">
+                            <span class="text-3xl font-black text-papua-gold/50 group-hover:text-papua-gold transition">02</span>
+                            <p class="font-bold text-base leading-tight group-hover:text-papua-brown transition">Mengenal Tradisi Lisan Sebagai Penjaga Hutan</p>
+                        </a>
+                        <a href="#" class="flex gap-4 items-center group">
+                            <span class="text-3xl font-black text-papua-gold/50 group-hover:text-papua-gold transition">03</span>
+                            <p class="font-bold text-base leading-tight group-hover:text-papua-brown transition">Noken: Lebih dari Sekadar Tas Rajutan</p>
+                        </a>
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+    </div>
+</section>

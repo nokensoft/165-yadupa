@@ -1,0 +1,121 @@
+<!-- Page Hero -->
+<section class="pt-40 pb-20 bg-papua-brown relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full opacity-10">
+        <div class="absolute top-10 left-10 w-72 h-72 border-[20px] border-white rounded-full"></div>
+        <div class="absolute bottom-10 right-10 w-96 h-96 border-[20px] border-papua-gold rounded-full"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <p class="text-sm font-black text-papua-gold uppercase tracking-[0.3em] mb-4">Dukung Kami</p>
+        <h1 class="text-5xl md:text-7xl font-black text-white uppercase italic leading-tight tracking-tighter">Bersama Membangun Papua</h1>
+        <div class="w-24 h-3 bg-papua-gold rounded-full mt-6"></div>
+        <p class="text-xl text-white/80 mt-6 max-w-2xl leading-relaxed">Setiap donasi Anda langsung berdampak bagi masyarakat adat di pedalaman Papua.</p>
+    </div>
+</section>
+
+<!-- Pilihan Donasi -->
+<section class="py-24 bg-white" x-data="{ selected: 'bulanan', amount: '' }">
+    <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-4xl font-black text-papua-brown uppercase italic mb-4 tracking-tighter text-center">Pilih Donasi</h2>
+        <div class="w-24 h-3 bg-papua-red rounded-full mb-12 mx-auto"></div>
+
+        <!-- Tipe Donasi -->
+        <div class="flex justify-center gap-4 mb-12">
+            <button @click="selected = 'sekali'"
+                    :class="selected === 'sekali' ? 'bg-papua-brown text-white' : 'bg-gray-100 text-gray-600'"
+                    class="px-8 py-4 rounded-2xl font-black uppercase tracking-wider transition text-lg">
+                Sekali
+            </button>
+            <button @click="selected = 'bulanan'"
+                    :class="selected === 'bulanan' ? 'bg-papua-brown text-white' : 'bg-gray-100 text-gray-600'"
+                    class="px-8 py-4 rounded-2xl font-black uppercase tracking-wider transition text-lg">
+                Bulanan
+            </button>
+        </div>
+
+        <!-- Nominal -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <button @click="amount = '50000'" :class="amount === '50000' ? 'border-papua-brown bg-papua-brown/5' : 'border-gray-200'" class="border-3 rounded-2xl p-6 text-center font-black text-xl hover:border-papua-brown transition">
+                Rp 50.000
+            </button>
+            <button @click="amount = '100000'" :class="amount === '100000' ? 'border-papua-brown bg-papua-brown/5' : 'border-gray-200'" class="border-3 rounded-2xl p-6 text-center font-black text-xl hover:border-papua-brown transition">
+                Rp 100.000
+            </button>
+            <button @click="amount = '250000'" :class="amount === '250000' ? 'border-papua-brown bg-papua-brown/5' : 'border-gray-200'" class="border-3 rounded-2xl p-6 text-center font-black text-xl hover:border-papua-brown transition">
+                Rp 250.000
+            </button>
+            <button @click="amount = '500000'" :class="amount === '500000' ? 'border-papua-brown bg-papua-brown/5' : 'border-gray-200'" class="border-3 rounded-2xl p-6 text-center font-black text-xl hover:border-papua-brown transition">
+                Rp 500.000
+            </button>
+        </div>
+
+        <!-- Custom Amount -->
+        <div class="mb-10">
+            <label class="text-sm font-black text-gray-400 uppercase tracking-widest mb-3 block">Atau masukkan nominal lain</label>
+            <div class="relative">
+                <span class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 font-black text-lg">Rp</span>
+                <input x-model="amount" type="text" placeholder="0" class="w-full pl-14 pr-5 py-5 rounded-2xl border-2 border-gray-200 focus:border-papua-brown focus:outline-none text-xl font-black transition">
+            </div>
+        </div>
+
+        <!-- Tombol Donasi -->
+        <button class="w-full py-6 bg-papua-gold text-papua-black font-black text-2xl rounded-2xl hover:scale-[1.02] transition-all shadow-xl uppercase tracking-wider">
+            Donasi Sekarang
+        </button>
+        <p class="text-center text-gray-400 text-sm mt-4">Donasi Anda aman dan terenkripsi. Prototype saja — belum terhubung ke payment gateway.</p>
+    </div>
+</section>
+
+<!-- Cara Lain Mendukung -->
+<section class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-black text-papua-brown uppercase italic mb-4 tracking-tighter">Cara Lain Mendukung</h2>
+        <div class="w-24 h-3 bg-papua-gold rounded-full mb-16"></div>
+
+        <div class="grid md:grid-cols-3 gap-10">
+            <div class="p-10 bg-white rounded-3xl shadow-xl border-b-8 border-papua-brown hover:-translate-y-2 transition">
+                <div class="w-16 h-16 bg-papua-brown/10 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-hand-holding-heart text-papua-brown text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-black mb-3">Jadi Relawan</h3>
+                <p class="text-gray-500 leading-relaxed">Bergabunglah dengan tim kami di lapangan untuk mendampingi masyarakat adat Papua secara langsung.</p>
+            </div>
+            <div class="p-10 bg-white rounded-3xl shadow-xl border-b-8 border-papua-gold hover:-translate-y-2 transition">
+                <div class="w-16 h-16 bg-papua-gold/10 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-share-nodes text-papua-brown text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-black mb-3">Sebarkan Cerita</h3>
+                <p class="text-gray-500 leading-relaxed">Bagikan konten dan cerita YADUPA di media sosial untuk memperluas kesadaran publik.</p>
+            </div>
+            <div class="p-10 bg-white rounded-3xl shadow-xl border-b-8 border-papua-red hover:-translate-y-2 transition">
+                <div class="w-16 h-16 bg-papua-red/10 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-building text-papua-red text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-black mb-3">Kemitraan Korporasi</h3>
+                <p class="text-gray-500 leading-relaxed">Jadikan perusahaan Anda mitra strategis dalam program pemberdayaan masyarakat adat.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Informasi Rekening -->
+<section class="py-24 bg-white">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+        <h2 class="text-4xl font-black text-papua-brown uppercase italic mb-4 tracking-tighter">Transfer Langsung</h2>
+        <div class="w-24 h-3 bg-papua-red rounded-full mb-12 mx-auto"></div>
+
+        <div class="bg-gray-50 rounded-3xl p-10 space-y-6">
+            <div class="p-6 bg-white rounded-2xl border-2 border-gray-100">
+                <p class="text-sm font-black text-gray-400 uppercase tracking-widest mb-2">Bank Mandiri</p>
+                <p class="text-3xl font-black text-papua-brown tracking-wider">1234-5678-9012-3456</p>
+                <p class="text-gray-500 mt-2">a.n. Yayasan Anak Dusun Papua</p>
+            </div>
+            <div class="p-6 bg-white rounded-2xl border-2 border-gray-100">
+                <p class="text-sm font-black text-gray-400 uppercase tracking-widest mb-2">Bank BNI</p>
+                <p class="text-3xl font-black text-papua-brown tracking-wider">0987-6543-2109-8765</p>
+                <p class="text-gray-500 mt-2">a.n. Yayasan Anak Dusun Papua</p>
+            </div>
+        </div>
+
+        <p class="text-gray-400 text-sm mt-8">Konfirmasi donasi via email: <span class="text-papua-brown font-bold">donasi@yadupa.org</span></p>
+    </div>
+</section>

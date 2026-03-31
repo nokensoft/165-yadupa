@@ -1,0 +1,35 @@
+<footer class="bg-papua-black text-white pt-24 pb-12 overflow-x-hidden">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-16 border-b border-gray-800 pb-16">
+        <div class="space-y-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl overflow-hidden">
+                    <img src="{{ asset('img/logo-yadupa.png') }}" alt="YADUPA Logo" class="w-full h-full object-cover">
+                </div>
+                <span class="text-2xl font-black uppercase tracking-tighter italic">YADUPA</span>
+            </div>
+            <p class="text-gray-400 text-lg leading-relaxed">Jl. Raya Abepura, Jayapura, Papua - Indonesia.</p>
+            <div class="flex space-x-6 text-2xl pt-2">
+                <a href="#" class="hover:text-papua-gold transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-papua-gold transition"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="hover:text-papua-gold transition"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div>
+            <h4 class="font-black mb-8 uppercase text-sm tracking-[0.3em] text-papua-gold">Navigasi</h4>
+            <ul class="space-y-4 text-gray-400 text-lg font-bold">
+                <li><a href="#" class="hover:text-white transition">Tentang Kami</a></li>
+                <li><a href="#blog" class="hover:text-white transition">Blog</a></li>
+                <li><a href="#" class="hover:text-white transition">Publikasi</a></li>
+                <li><a href="#" class="hover:text-white transition">Kontak</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="font-black mb-8 uppercase text-sm tracking-[0.3em] text-papua-gold">Dukung Kami</h4>
+            <p class="text-gray-400 mb-6 text-base">Kontribusi Anda membantu kami dalam menjalankan program pemberdayaan.</p>
+            <button class="w-full bg-papua-brown text-white font-black py-4 rounded-2xl hover:bg-opacity-80 transition uppercase tracking-widest text-lg shadow-inner shadow-black/20">Donasi Sekarang</button>
+        </div>
+    </div>
+    <div class="text-center pt-12 text-gray-600 text-sm font-bold uppercase tracking-widest leading-relaxed">
+        <p>&copy; {{ date('Y') }} YADUPA Papua Foundation.</p>
+    </div>
+</footer>
