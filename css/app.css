@@ -3,6 +3,20 @@
     background-size: 24px 24px;
 }
 
+.bg-grid {
+    background-image:
+        linear-gradient(rgba(160, 82, 45, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(160, 82, 45, 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+}
+
+.bg-grid-light {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 48px 48px;
+}
+
 body {
     font-size: 1.125rem;
 }

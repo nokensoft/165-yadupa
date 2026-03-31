@@ -1,25 +1,56 @@
-<header x-data="{ mobileMenuOpen: false, scrolled: false, langOpen: false, currentLang: 'ID' }"
+<!-- Topbar Disclaimer -->
+<div class="bg-papua-black text-white text-center py-2.5 px-6 text-xs md:text-sm font-bold tracking-wide fixed top-0 left-0 w-full z-[60]">
+    <i class="fas fa-code mr-1"></i> Website masih dalam tahap pengembangan. Desain prototype oleh <a href="https://nokensoft.com" target="_blank" class="text-papua-gold hover:underline">Nokensoft.com</a>
+</div>
+
+<header x-data="{
+            mobileMenuOpen: false, scrolled: false, langOpen: false, aboutOpen: false, currentLang: 'ID',
+            page: window.location.pathname.split('/').pop() || 'index.html',
+            isActive(href) { return this.page === href }
+        }"
         @scroll.window="scrolled = (window.pageYOffset > 20)"
         :class="scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-6'"
-        class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        class="fixed top-[36px] left-0 w-full z-50 transition-all duration-300">
     <nav class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <div class="flex items-center space-x-3">
+        <a href="index.html" class="flex items-center space-x-3">
             <div class="w-12 h-12 rounded-2xl overflow-hidden">
                 <img src="public/img/logo-yadupa.png" alt="YADUPA Logo" class="w-full h-full object-cover">
             </div>
-            <span class="text-2xl font-black text-papua-brown uppercase tracking-tighter italic">YADUPA</span>
-        </div>
+            <div>
+                <span class="block text-2xl font-black text-papua-brown uppercase tracking-tighter italic leading-none">YADUPA</span>
+                <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em]">Yayasan Anak Dusun Papua</span>
+            </div>
+        </a>
 
         <div class="hidden md:flex items-center space-x-8 font-bold text-lg uppercase tracking-wider">
-            <a href="index.html" class="text-papua-brown hover:text-papua-red transition">Beranda</a>
-            <a href="tentang-kami.html" class="text-gray-500 hover:text-papua-brown transition">Tentang Kami</a>
-            <a href="dampak.html" class="text-gray-500 hover:text-papua-brown transition">Dampak</a>
-            <a href="blog.html" class="text-gray-500 hover:text-papua-brown transition">Blog</a>
-            <a href="dukung-kami.html" class="bg-papua-gold text-papua-black px-6 py-2.5 rounded-full hover:shadow-xl transition transform hover:-translate-y-1 text-base">DUKUNG KAMI</a>
+            <a href="index.html" :class="isActive('index.html') ? 'text-papua-brown border-b-2 border-papua-brown pb-1' : 'text-gray-500 hover:text-papua-brown'" class="transition"><i class="fas fa-home mr-1 text-sm"></i> Beranda</a>
+
+            <!-- Tentang Kami + Submenu -->
+            <div class="relative" @click.away="aboutOpen = false">
+                <button @click="aboutOpen = !aboutOpen" :class="isActive('tentang-kami.html') ? 'text-papua-brown border-b-2 border-papua-brown pb-1' : 'text-gray-500 hover:text-papua-brown'" class="uppercase transition flex items-center gap-1">
+                    <i class="fas fa-users mr-1 text-sm"></i> Tentang Kami
+                    <i class="fas fa-chevron-down text-[10px] transition-transform" :class="aboutOpen ? 'rotate-180' : ''"></i>
+                </button>
+                <div x-show="aboutOpen" x-cloak
+                     x-transition:enter="transition ease-out duration-150"
+                     x-transition:enter-start="opacity-0 -translate-y-2"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     class="absolute left-0 mt-4 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden py-3">
+                    <a href="tentang-kami.html" class="block px-6 py-3 hover:bg-gray-50 text-gray-700 font-bold text-sm normal-case tracking-normal"><i class="fas fa-building mr-2 text-papua-brown"></i>Profil Organisasi</a>
+                    <a href="tentang-kami.html#visi" class="block px-6 py-3 hover:bg-gray-50 text-gray-700 font-bold text-sm normal-case tracking-normal"><i class="fas fa-eye mr-2 text-papua-brown"></i>Visi & Misi</a>
+                    <a href="tentang-kami.html#sejarah" class="block px-6 py-3 hover:bg-gray-50 text-gray-700 font-bold text-sm normal-case tracking-normal"><i class="fas fa-clock-rotate-left mr-2 text-papua-brown"></i>Perjalanan Kami</a>
+                    <a href="tentang-kami.html#nilai" class="block px-6 py-3 hover:bg-gray-50 text-gray-700 font-bold text-sm normal-case tracking-normal"><i class="fas fa-heart mr-2 text-papua-brown"></i>Nilai-Nilai</a>
+                </div>
+            </div>
+
+            <a href="dampak.html" :class="isActive('dampak.html') ? 'text-papua-brown border-b-2 border-papua-brown pb-1' : 'text-gray-500 hover:text-papua-brown'" class="transition"><i class="fas fa-chart-line mr-1 text-sm"></i> Dampak</a>
+            <a href="blog.html" :class="isActive('blog.html') || isActive('post-detail.html') ? 'text-papua-brown border-b-2 border-papua-brown pb-1' : 'text-gray-500 hover:text-papua-brown'" class="transition"><i class="fas fa-newspaper mr-1 text-sm"></i> Blog</a>
+            <a href="dukung-kami.html" class="bg-papua-gold text-papua-black px-6 py-2.5 rounded-full hover:shadow-xl transition transform hover:-translate-y-1 text-base"><i class="fas fa-hand-holding-heart mr-1"></i> DUKUNG KAMI</a>
 
             <!-- Language Switcher -->
             <div class="relative border-l border-gray-200 pl-8 ml-2">
                 <button @click="langOpen = !langOpen" @click.away="langOpen = false" class="flex items-center space-x-2 text-gray-600 hover:text-papua-brown transition uppercase tracking-widest text-base font-black">
+                    <i class="fas fa-globe text-sm"></i>
                     <span x-text="currentLang">ID</span>
                     <i class="fas fa-chevron-down text-xs transition-transform" :class="langOpen ? 'rotate-180' : ''"></i>
                 </button>
@@ -42,15 +73,22 @@
 
     <!-- Mobile Menu -->
     <div x-show="mobileMenuOpen" x-transition x-cloak class="md:hidden bg-white border-t border-gray-100 px-6 py-8 space-y-6 shadow-2xl">
-        <a href="index.html" class="block text-xl font-bold text-papua-brown">Beranda</a>
-        <a href="tentang-kami.html" class="block text-xl font-bold text-gray-500">Tentang Kami</a>
-        <a href="dampak.html" class="block text-xl font-bold text-gray-500">Dampak</a>
-        <a href="blog.html" class="block text-xl font-bold text-gray-500">Blog</a>
+        <a href="index.html" :class="isActive('index.html') ? 'text-papua-brown' : 'text-gray-500'" class="block text-xl font-bold"><i class="fas fa-home mr-2 text-base"></i>Beranda</a>
+        <div>
+            <a href="tentang-kami.html" :class="isActive('tentang-kami.html') ? 'text-papua-brown' : 'text-gray-500'" class="block text-xl font-bold"><i class="fas fa-users mr-2 text-base"></i>Tentang Kami</a>
+            <div class="pl-8 mt-3 space-y-3">
+                <a href="tentang-kami.html#visi" class="block text-base font-bold text-gray-400 hover:text-papua-brown"><i class="fas fa-eye mr-2"></i>Visi & Misi</a>
+                <a href="tentang-kami.html#sejarah" class="block text-base font-bold text-gray-400 hover:text-papua-brown"><i class="fas fa-clock-rotate-left mr-2"></i>Perjalanan</a>
+                <a href="tentang-kami.html#nilai" class="block text-base font-bold text-gray-400 hover:text-papua-brown"><i class="fas fa-heart mr-2"></i>Nilai-Nilai</a>
+            </div>
+        </div>
+        <a href="dampak.html" :class="isActive('dampak.html') ? 'text-papua-brown' : 'text-gray-500'" class="block text-xl font-bold"><i class="fas fa-chart-line mr-2 text-base"></i>Dampak</a>
+        <a href="blog.html" :class="isActive('blog.html') ? 'text-papua-brown' : 'text-gray-500'" class="block text-xl font-bold"><i class="fas fa-newspaper mr-2 text-base"></i>Blog</a>
         <div class="flex space-x-4 border-t border-gray-100 pt-6">
-            <button class="text-papua-brown font-black uppercase">ID</button>
+            <button class="text-papua-brown font-black uppercase"><i class="fas fa-globe mr-1"></i>ID</button>
             <span class="text-gray-300">|</span>
             <button class="text-gray-400 font-black uppercase">EN</button>
         </div>
-        <a href="dukung-kami.html" class="block w-full bg-papua-brown text-white py-4 rounded-2xl font-bold text-lg text-center">DUKUNG KAMI</a>
+        <a href="dukung-kami.html" class="block w-full bg-papua-brown text-white py-4 rounded-2xl font-bold text-lg text-center"><i class="fas fa-hand-holding-heart mr-2"></i>DUKUNG KAMI</a>
     </div>
 </header>
