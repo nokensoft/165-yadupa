@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media & Galeri - YADUPA</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js CDN -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+    </style>
+</head>
+<body class="antialiased bg-stone-50 text-stone-800 flex flex-col min-h-screen" x-data="mediaApp()">
+
+    <!-- Navigasi Utama -->
+    <nav x-data="{ scrolled: false }" 
+         @scroll.window="scrolled = (window.pageYOffset > 50)"
+         class="fixed top-0 left-0 right-0 z-50 px-6 py-4 pointer-events-none">
+        
+        <div class="container mx-auto">
+            <div :class="scrolled ? 'bg-white/90 backdrop-blur-md shadow-xl border-stone-200' : 'bg-white/90 backdrop-blur-md shadow-md border-stone-200'" 
+                 class="flex items-center justify-between border px-6 py-3 rounded-2xl transition-all duration-300 pointer-events-auto">
+                
+                <!-- Logo YADUPA -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <img src="./images/logo-yadupa-transparant.png" alt="YADUPA Logo" class="h-10 w-auto">
+                    <div class="text-stone-900 text-xl font-bold transition-colors duration-300">
+                        <span class="block text-2xl">YADUPA</span>
+                        <span class="block text-xs font-medium -mt-1 tracking-wider opacity-90">Yayasan Anak Dusun Papua</span>
+                    </div>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-stone-800 focus:outline-none transition-colors duration-300">
+                    <i :class="mobileMenuOpen ? 'fas fa-times' : 'fas fa-bars'" class="text-2xl"></i>
+                </button>
+
+                <!-- Desktop Links -->
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" class="text-stone-700 hover:bg-stone-100 px-4 py-2 rounded-full text-sm font-medium transition duration-300">Beranda</a>
+                    <a href="about.html" class="text-stone-700 hover:bg-stone-100 px-4 py-2 rounded-full text-sm font-medium transition duration-300">Siapa Kami</a>
+                    <a href="what-we-do.html" class="text-stone-700 hover:bg-stone-100 px-4 py-2 rounded-full text-sm font-medium transition duration-300">Yang Kami Lakukan</a>
+                    <a href="partners.html" class="text-stone-700 hover:bg-stone-100 px-4 py-2 rounded-full text-sm font-medium transition duration-300">Mitra/Jaringan</a>
+                    <a href="media.html" class="text-stone-900 bg-stone-100 px-4 py-2 rounded-full text-sm font-medium transition duration-300">Media</a>
+
+                    <div class="bg-stone-200 h-6 w-px mx-2 transition-colors duration-300"></div>
+
+                    <a href="contact.html" class="text-stone-700 hover:bg-stone-100 px-4 py-2 rounded-full text-sm font-medium transition duration-300">Kontak & Kolaborasi</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Drawer -->
+    <div x-show="mobileMenuOpen" 
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         class="md:hidden bg-white shadow-xl rounded-2xl mt-24 p-6 space-y-4 absolute left-6 right-6 z-40 border border-stone-200"
+         @click.outside="mobileMenuOpen = false"
+         style="display: none;">
+        <a href="index.html" class="block text-stone-800 font-medium hover:text-red-600 py-2">Beranda</a>
+        <a href="about.html" class="block text-stone-800 font-medium hover:text-red-600 py-2">Siapa Kami</a>
+        <a href="what-we-do.html" class="block text-stone-800 font-medium hover:text-red-600 py-2">Yang Kami Lakukan</a>
+        <a href="partners.html" class="block text-stone-800 font-medium hover:text-red-600 py-2">Mitra/Jaringan</a>
+        <a href="media.html" class="block text-red-600 font-medium py-2">Media</a>
+        <a href="contact.html" class="block w-full text-center text-white bg-red-600 px-5 py-3 rounded-xl font-medium hover:bg-red-700">Kontak & Kolaborasi</a>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <main class="flex-grow pt-32 pb-20 px-6">
+        <div class="container mx-auto max-w-6xl">
+            
+            <!-- Breadcrumb Minimalis -->
+            <nav class="text-xs font-medium text-stone-500 mb-6 flex items-center space-x-2">
+                <a href="index.html" class="hover:text-red-600 transition">Beranda</a>
+                <span>/</span>
+                <span class="text-stone-800">Media</span>
+            </nav>
+
+            <!-- Page Header & Search Bar -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                <div>
+                    <div class="w-16 h-1.5 bg-red-600 mb-4 rounded-full"></div>
+                    <h1 class="text-3xl md:text-5xl font-extrabold text-stone-900 tracking-tight">
+                        Galeri & Dokumentasi Media
+                    </h1>
+                    <p class="text-stone-600 mt-3 text-lg">
+                        Kumpulan dokumentasi kegiatan, program, dan momen penting perjalanan YADUPA di Tanah Papua.
+                    </p>
+                </div>
+
+                <!-- Fitur Pencarian berdasarkan nama/judul kegiatan -->
+                <div class="w-full md:w-80">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-stone-400">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" 
+                               x-model="searchQuery" 
+                               @input="currentPage = 1"
+                               placeholder="Cari nama kegiatan..." 
+                               class="w-full pl-11 pr-4 py-3 bg-white border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 shadow-sm transition">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Album Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" x-show="paginatedAlbums.length > 0">
+                <template x-for="album in paginatedAlbums" :key="album.id">
+                    <div @click="openModal(album)" 
+                         class="bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition cursor-pointer group flex flex-col">
+                        
+                        <!-- Album Cover -->
+                        <div class="relative h-56 overflow-hidden bg-stone-100">
+                            <img :src="album.cover" :alt="album.judul" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition"></div>
+                            <div class="absolute bottom-3 right-3 bg-black/70 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+                                <i class="fas fa-images"></i>
+                                <span x-text="album.galeri.length + ' Foto'"></span>
+                            </div>
+                        </div>
+
+                        <!-- Album Title & Short Info -->
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-lg font-bold text-stone-900 group-hover:text-red-600 transition mb-2" x-text="album.judul"></h3>
+                            <p class="text-sm text-stone-600 line-clamp-2 leading-relaxed" x-text="album.keterangan"></p>
+                            
+                            <div class="mt-4 pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-semibold text-red-600">
+                                <span>Lihat Detail Album</span>
+                                <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Pagination Navigasi -->
+            <div class="mt-12 flex items-center justify-center space-x-2" x-show="totalPages > 1" style="display: none;">
+                <!-- Tombol Sebelumnya -->
+                <button @click="changePage(currentPage - 1)" 
+                        :disabled="currentPage === 1"
+                        :class="currentPage === 1 ? 'opacity-50 cursor-not-allowed bg-stone-100 text-stone-400' : 'bg-white hover:bg-stone-100 text-stone-700 border-stone-200'"
+                        class="px-4 py-2 border rounded-xl text-sm font-medium transition shadow-sm">
+                    <i class="fas fa-chevron-left mr-1"></i> Sebelumnya
+                </button>
+
+                <!-- Nomor Halaman -->
+                <div class="flex items-center space-x-1">
+                    <template x-for="page in totalPages" :key="page">
+                        <button @click="changePage(page)" 
+                                :class="currentPage === page ? 'bg-red-600 text-white border-red-600 shadow-md' : 'bg-white hover:bg-stone-100 text-stone-700 border-stone-200'"
+                                class="w-10 h-10 border rounded-xl text-sm font-semibold transition"
+                                x-text="page">
+                        </button>
+                    </template>
+                </div>
+
+                <!-- Tombol Selanjutnya -->
+                <button @click="changePage(currentPage + 1)" 
+                        :disabled="currentPage === totalPages"
+                        :class="currentPage === totalPages ? 'opacity-50 cursor-not-allowed bg-stone-100 text-stone-400' : 'bg-white hover:bg-stone-100 text-stone-700 border-stone-200'"
+                        class="px-4 py-2 border rounded-xl text-sm font-medium transition shadow-sm">
+                    Selanjutnya <i class="fas fa-chevron-right ml-1"></i>
+                </button>
+            </div>
+
+            <!-- Empty State Jika Pencarian Tidak Ditemukan -->
+            <div x-show="filteredAlbums.length === 0" class="text-center py-20 bg-white border border-stone-200 rounded-2xl" style="display: none;">
+                <div class="w-16 h-16 bg-stone-100 text-stone-400 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3 class="text-lg font-bold text-stone-900 mb-1">Kegiatan Tidak Ditemukan</h3>
+                <p class="text-sm text-stone-500">Tidak ada album yang cocok dengan kata kunci "<span x-text="searchQuery"></span>".</p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modal Detail Album -->
+    <div x-show="modalOpen" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto"
+         @click.outside="closeModal()"
+         style="display: none;">
+        
+        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-stone-200 my-8"
+             @click.stop>
+            
+            <!-- Modal Header -->
+            <div class="sticky top-0 bg-white/95 backdrop-blur-md px-6 py-4 border-b border-stone-200 flex items-center justify-between z-10">
+                <h2 class="text-xl font-extrabold text-stone-900 pr-4" x-text="activeAlbum.judul"></h2>
+                <button @click="closeModal()" class="w-10 h-10 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 flex items-center justify-center transition">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body Content -->
+            <div class="p-6 md:p-8 space-y-6">
+                
+                <!-- Keterangan Singkat -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-red-600 mb-2">Tentang Kegiatan</h4>
+                    <p class="text-stone-700 text-base leading-relaxed" x-text="activeAlbum.keterangan"></p>
+                </div>
+
+                <hr class="border-stone-100">
+
+                <!-- Galeri Foto -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-red-600 mb-4">Galeri Foto Kegiatan</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <template x-for="(foto, index) in activeAlbum.galeri" :key="index">
+                            <div class="overflow-hidden rounded-xl bg-stone-100 border border-stone-200 h-64">
+                                <img :src="foto" :alt="activeAlbum.judul + ' - ' + (index + 1)" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="bg-stone-50 px-6 py-4 border-t border-stone-200 flex justify-end">
+                <button @click="closeModal()" class="px-6 py-2.5 bg-stone-900 hover:bg-stone-800 text-white text-sm font-semibold rounded-xl transition">
+                    Tutup
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-stone-200 py-8 px-6 mt-auto text-center">
+        <div class="container mx-auto flex flex-col items-center justify-center text-xs text-stone-500 gap-4">
+            <!-- Media Sosial Links -->
+            <div class="flex items-center justify-center space-x-4 text-base">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-stone-100 hover:bg-red-600 hover:text-white text-stone-700 rounded-full flex items-center justify-center transition-colors duration-300" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-stone-100 hover:bg-red-600 hover:text-white text-stone-700 rounded-full flex items-center justify-center transition-colors duration-300" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-stone-100 hover:bg-red-600 hover:text-white text-stone-700 rounded-full flex items-center justify-center transition-colors duration-300" aria-label="WhatsApp Channel">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-stone-100 hover:bg-red-600 hover:text-white text-stone-700 rounded-full flex items-center justify-center transition-colors duration-300" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+
+            <!-- Copyright & Powered by -->
+            <div class="flex flex-col items-center justify-center gap-2">
+                <p>&copy; 2026 YADUPA (Yayasan Anak Dusun Papua). All rights reserved.</p>
+                <p>
+                    Powered by 
+                    <a href="https://nokensoft.com" target="_blank" rel="noopener noreferrer" class="text-red-600 font-semibold hover:underline">
+                        Nokensoft.com
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alpine.js Component Script -->
+    <script>
+        function mediaApp() {
+            return {
+                albums: [],
+                searchQuery: '',
+                currentPage: 1,
+                perPage: 6, // Maksimal 6 postingan per halaman
+                modalOpen: false,
+                activeAlbum: { judul: '', keterangan: '', galeri: [] },
+                mobileMenuOpen: false,
+
+                init() {
+                    // Mengambil data secara asinkron dari file media.json
+                    fetch('media.json')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.albums = data;
+                        })
+                        .catch(error => {
+                            console.error('Gagal memuat data media:', error);
+                        });
+                },
+
+                get filteredAlbums() {
+                    if (!this.searchQuery.trim()) {
+                        return this.albums;
+                    }
+                    const query = this.searchQuery.toLowerCase();
+                    return this.albums.filter(album => album.judul.toLowerCase().includes(query));
+                },
+
+                get totalPages() {
+                    return Math.ceil(this.filteredAlbums.length / this.perPage) || 1;
+                },
+
+                get paginatedAlbums() {
+                    const start = (this.currentPage - 1) * this.perPage;
+                    const end = start + this.perPage;
+                    return this.filteredAlbums.slice(start, end);
+                },
+
+                changePage(page) {
+                    if (page >= 1 && page <= this.totalPages) {
+                        this.currentPage = page;
+                        window.scrollTo({ top: 300, behavior: 'smooth' });
+                    }
+                },
+
+                openModal(album) {
+                    this.activeAlbum = album;
+                    this.modalOpen = true;
+                    document.body.style.overflow = 'hidden'; 
+                },
+
+                closeModal() {
+                    this.modalOpen = false;
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

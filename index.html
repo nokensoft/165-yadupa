@@ -1,66 +1,215 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full scroll-smooth">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YADUPA | Yayasan Anak Dusun Papua</title>
-
-    <link rel="icon" type="image/png" sizes="32x32" href="public/img/logo-yadupa.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="public/img/logo-yadupa.png">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,700;0,800;1,800&display=swap" rel="stylesheet">
-
+    <title>YADUPA - Yayasan Anak Dusun Papua</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="js/blade.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine.js CDN -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
-                    colors: {
-                        'papua-brown': '#A0522D',
-                        'papua-gold': '#FFD700',
-                        'papua-red': '#D2691E',
-                        'papua-black': '#1A1A1A'
-                    }
-                }
-            }
+    <style>
+        /* Custom Font Stack for better readability */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
-    </script>
-
-    <link rel="stylesheet" href="css/app.css">
+        /* Menjaga rasio gambar latar agar tidak melar */
+        .hero-bg {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
 </head>
-<body class="bg-white font-sans antialiased text-gray-800 leading-relaxed overflow-x-hidden">
+<body class="antialiased bg-stone-50 text-stone-800 flex flex-col min-h-screen" x-data="{ showDisclaimerModal: false }">
 
-    <!-- @include('partials.header') -->
-    <div x-data x-include="partials.header"></div>
+    <!-- Header & Hero Section -->
+    <header x-data="{ open: false }" class="relative min-h-screen hero-bg" style="background-image: url('./images/bg2.jpeg');">
+        
+        <!-- Overlay Gelap untuk Keterbacaan Teks -->
+        <div class="absolute inset-0 bg-black/30"></div>
 
-    <!-- @yield('content') → pages/home -->
-    <main>
-        <!-- @include('sections.hero') -->
-        <div x-data x-include="sections.hero"></div>
+        <!-- Konten Header & Hero -->
+        <div class="relative z-10 flex flex-col min-h-screen">
+            
+            
+            <!-- Navigasi Utama dengan deteksi scroll -->
+            <nav x-data="{ scrolled: false }" 
+                @scroll.window="scrolled = (window.pageYOffset > 50)"
+                class="fixed top-0 left-0 right-0 z-50 px-6 py-4 pointer-events-none">
+                
+                <div class="container mx-auto">
+                    <!-- Kotak Navigasi (Hanya bagian ini yang menjadi putih & fixed saat scroll) -->
+                    <div :class="scrolled ? 'bg-white/90 backdrop-blur-md shadow-xl border-stone-200' : 'bg-white/10 backdrop-blur-md border-white/20'" 
+                        class="flex flex-col border px-6 py-3 rounded-2xl transition-all duration-300 pointer-events-auto">
+                        
+                        <div class="flex items-center justify-between w-full">
+                            <!-- Logo YADUPA (Warna berubah saat scroll) -->
+                            <a href="index.html" class="flex items-center gap-3 group">
+                                <img src="./images/logo-yadupa-transparant.png" alt="YADUPA Logo" class="h-10 w-auto">
+                                <div :class="scrolled ? 'text-stone-900' : 'text-white'" class="text-xl font-bold transition-colors duration-300">
+                                    <span class="block text-2xl">YADUPA</span>
+                                    <span class="block text-xs font-medium -mt-1 tracking-wider opacity-90">Yayasan Anak Dusun Papua</span>
+                                </div>
+                            </a>
 
-        <!-- @include('sections.about') -->
-        <div x-data x-include="sections.about"></div>
+                            <!-- Mobile Menu Button (Warna berubah saat scroll) -->
+                            <button @click="open = !open" :class="scrolled ? 'text-stone-800' : 'text-white'" class="md:hidden focus:outline-none transition-colors duration-300">
+                                <i :class="open ? 'fas fa-times' : 'fas fa-bars'" class="text-2xl"></i>
+                            </button>
 
-        <!-- @include('sections.gallery') -->
-        <div x-data x-include="sections.gallery"></div>
+                            <!-- Desktop Links (Warna berubah saat scroll) -->
+                            <div class="hidden md:flex items-center space-x-2">
+                                <a href="index.html" :class="scrolled ? 'text-stone-700 hover:bg-stone-100' : 'text-white hover:bg-white/20'" class="px-4 py-2 rounded-full text-sm font-medium transition duration-300">Beranda</a>
+                                <a href="about.html" :class="scrolled ? 'text-stone-700 hover:bg-stone-100' : 'text-white hover:bg-white/20'" class="px-4 py-2 rounded-full text-sm font-medium transition duration-300">Siapa Kami</a>
+                                <a href="what-we-do.html" :class="scrolled ? 'text-stone-700 hover:bg-stone-100' : 'text-white hover:bg-white/20'" class="px-4 py-2 rounded-full text-sm font-medium transition duration-300">Yang Kami Lakukan</a>
+                                <a href="partners.html" :class="scrolled ? 'text-stone-700 hover:bg-stone-100' : 'text-white hover:bg-white/20'" class="px-4 py-2 rounded-full text-sm font-medium transition duration-300">Mitra/Jaringan</a>
+                                <a href="media.html" :class="scrolled ? 'text-stone-700 hover:bg-stone-100' : 'text-white hover:bg-white/20'" class="px-4 py-2 rounded-full text-sm font-medium transition duration-300">Media</a>
 
-        <!-- @include('sections.cta') -->
-        <div x-data x-include="sections.cta"></div>
-    </main>
+                                <div :class="scrolled ? 'bg-stone-200' : 'bg-white/20'" class="h-6 w-px mx-2 transition-colors duration-300"></div>
 
-    <!-- @include('partials.footer') -->
-    <div x-data x-include="partials.footer"></div>
+                                <a href="contact.html" :class="scrolled ? 'text-stone-700 hover:bg-stone-100' : 'text-white hover:bg-white/20'" class="px-4 py-2 rounded-full text-sm font-medium transition duration-300">Kontak & Kolaborasi</a>
+                            </div>
+                        </div>
 
-    <div x-data x-include="partials.floating-buttons"></div>
+                        <!-- Mobile Menu Dropdown (Tampil di dalam kotak ketika open bernilai true) -->
+                        <div x-show="open" 
+                             x-transition 
+                             style="display: none;"
+                             class="md:hidden pt-4 pb-2 border-t border-stone-200/20 mt-3 space-y-2">
+                            <a href="index.html" :class="scrolled ? 'text-stone-700 hover:bg-stone-100' : 'text-white hover:bg-white/20'" class="block px-4 py-2 rounded-xl text-sm font-medium transition duration-300">Beranda</a>
+                            <a href="about.html" :class="scrolled ? 'text-stone-700 hover:bg-stone-100' : 'text-white hover:bg-white/20'" class="block px-4 py-2 rounded-xl text-sm font-medium transition duration-300">Siapa Kami</a>
+                            <a href="what-we-do.html" :class="scrolled ? 'text-stone-700 hover:bg-stone-100' : 'text-white hover:bg-white/20'" class="block px-4 py-2 rounded-xl text-sm font-medium transition duration-300">Yang Kami Lakukan</a>
+                            <a href="partners.html" :class="scrolled ? 'text-stone-700 hover:bg-stone-100' : 'text-white hover:bg-white/20'" class="block px-4 py-2 rounded-xl text-sm font-medium transition duration-300">Mitra/Jaringan</a>
+                            <a href="media.html" :class="scrolled ? 'text-stone-700 hover:bg-stone-100' : 'text-white hover:bg-white/20'" class="block px-4 py-2 rounded-xl text-sm font-medium transition duration-300">Media</a>
+                            <a href="contact.html" :class="scrolled ? 'text-stone-700 hover:bg-stone-100' : 'text-white hover:bg-white/20'" class="block px-4 py-2 rounded-xl text-sm font-medium transition duration-300">Kontak & Kolaborasi</a>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+
+
+
+            <!-- Hero Content -->
+            <main class="container mx-auto px-6 flex-grow flex items-center pt-28 pb-32 md:pt-36 md:pb-48">
+                <div class="max-w-3xl">
+                    <!-- Red accent line -->
+                    <div class="w-24 h-2 bg-red-600 mb-8 rounded-full shadow-inner"></div>
+
+                    <!-- Hero Text with White Boxes -->
+                    <h1 class="space-y-4">
+                        <span class="block text-3xl md:text-6xl lg:text-7xl font-extrabold text-white bg-black/60 px-6 py-4 inline-block rounded-xl tracking-tight leading-tight shadow-lg">
+                            <span class="text-red-500">YAYASAN</span> ANAK DUSUN PAPUA
+                        </span>
+                        
+                        <span class="block text-lg md:text-2xl font-semibold text-white bg-black/60 px-6 py-4 inline-block rounded-xl leading-relaxed tracking-wide shadow-lg">
+                            Lembaga Swadaya Masyarakat (LSM) yang Mendapatkan Mandate Untuk Bekerja Sebagai Penguatan Masyarakat Adat Papua Secara Khusus Generasi Muda Papua.
+                        </span>
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <p class="text-lg text-white/90 mt-8 max-w-2xl bg-black/30 p-4 rounded-xl backdrop-blur-sm border border-white/10">
+                        Berdedikasi untuk memberikan akses pendidikan yang layak dan berkelanjutan bagi anak-anak muda di Tanah Papua. Bersama kita wujudkan mimpi mereka.
+                    </p>
+
+                    <!-- Call to Action buttons (Diubah menjadi bentuk kotak / rounded-xl) -->
+                    <div class="mt-10 flex flex-col sm:flex-row gap-5">
+                        <a href="contact.html" class="px-8 py-4 bg-red-600 text-white font-semibold rounded-xl text-center hover:bg-red-700 transition shadow-xl shadow-red-950/40 flex items-center justify-center gap-3 text-base uppercase">
+                            <i class="fas fa-envelope"></i>
+                            Kontak & Kolaborasi
+                        </a>
+                        <a href="what-we-do.html" class="px-8 py-4 bg-white/90 backdrop-blur-md text-stone-950 font-semibold rounded-xl text-center hover:bg-white transition shadow-xl flex items-center justify-center gap-3 text-base uppercase">
+                            Program & Kegiatan
+                        </a>
+                    </div>
+                </div>
+            </main>
+
+        </div>
+
+    </header>
+
+    <!-- Tombol Mengambang (Floating Button) di Kanan Bawah -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button @click="showDisclaimerModal = true" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-2.5 transition-all duration-300 transform hover:scale-105 focus:outline-none border border-amber-400/30">
+            <span class="flex h-3 w-3 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-200"></span>
+            </span>
+            <i class="fas fa-triangle-exclamation text-sm"></i>
+            <span class="text-xs font-bold uppercase tracking-wider hidden sm:inline">Info Pengembangan</span>
+        </button>
+    </div>
+
+    <!-- Modal Popup Disclaimer -->
+    <div x-show="showDisclaimerModal" 
+         style="display: none;"
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs px-4"
+         x-transition.opacity>
+        
+        <div @click.away="showDisclaimerModal = false" class="bg-white rounded-2xl max-w-lg w-full p-6 md:p-8 shadow-2xl border border-stone-200 relative">
+            <!-- Tombol Tutup -->
+            <button @click="showDisclaimerModal = false" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700 text-xl focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <!-- Konten Modal -->
+            <div class="flex items-center gap-4 mb-4">
+                <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-xl shrink-0">
+                    <i class="fas fa-triangle-exclamation"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-stone-900">Pemberitahuan Pengembangan</h3>
+                    <p class="text-xs text-amber-700 font-medium">Status Website: Tahap Uji Coba</p>
+                </div>
+            </div>
+
+            <p class="text-stone-600 text-sm leading-relaxed mb-6">
+                Website ini masih dalam tahap pengembangan. Beberapa informasi dan data yang disajikan masih memerlukan validasi serta verifikasi lebih lanjut. Tampilan maupun isi halaman dapat berubah sewaktu-waktu selama masa pengembangan ini.
+            </p>
+
+            <div class="flex justify-end">
+                <button @click="showDisclaimerModal = false" class="bg-stone-900 hover:bg-stone-800 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition shadow-md">
+                    Saya Mengerti
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-stone-200 py-8 px-6 mt-auto text-center">
+        <div class="container mx-auto flex flex-col items-center justify-center text-xs text-stone-500 gap-4">
+            <!-- Media Sosial Links -->
+            <div class="flex items-center justify-center space-x-4 text-base">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-stone-100 hover:bg-red-600 hover:text-white text-stone-700 rounded-full flex items-center justify-center transition-colors duration-300" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-stone-100 hover:bg-red-600 hover:text-white text-stone-700 rounded-full flex items-center justify-center transition-colors duration-300" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-stone-100 hover:bg-red-600 hover:text-white text-stone-700 rounded-full flex items-center justify-center transition-colors duration-300" aria-label="WhatsApp Channel">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-stone-100 hover:bg-red-600 hover:text-white text-stone-700 rounded-full flex items-center justify-center transition-colors duration-300" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+
+            <!-- Copyright & Powered by -->
+            <div class="flex flex-col items-center justify-center gap-2">
+                <p>&copy; 2026 YADUPA (Yayasan Anak Dusun Papua). Hak Cipta Dilindungi.</p>
+                <p>
+                    Powered by 
+                    <a href="https://nokensoft.com" target="_blank" rel="noopener noreferrer" class="text-red-600 font-semibold hover:underline">
+                        Nokensoft.com
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
