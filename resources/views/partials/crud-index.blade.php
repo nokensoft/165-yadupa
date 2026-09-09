@@ -1,0 +1,122 @@
+{{-- Reusable CRUD Index Table --}}
+{{-- Usage: @include('partials.crud-index', ['title' => '...', 'createRoute' => '...', 'columns' => [...], 'rows' => [...], 'paginator' => $model]) --}}
+
+<div class="bg-white shadow-sm p-6">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <form method="GET" class="relative w-full sm:w-80">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"><i class="fas fa-search"></i></span>
+            <input type="text" name="cari" value="{{ request('cari') }}" placeholder="Cari {{ strtolower($title) }}..." class="w-full border border-gray-300 p-2.5 pl-10 text-sm focus:border-primary focus:outline-none transition no-round">
+        </form>
+        <div class="flex gap-2">
+            @if (isset($trashedRoute))
+                @if (request('status') === 'terhapus')
+                    <a href="{{ $trashedRoute }}" class="bg-gray-600 text-white px-4 py-2.5 font-bold text-sm hover:bg-gray-700 transition no-round whitespace-nowrap">
+                        <i class="fas fa-list mr-1"></i> Semua
+                    </a>
+                @else
+                    <a href="{{ $trashedRoute }}?status=terhapus" class="bg-gray-600 text-white px-4 py-2.5 font-bold text-sm hover:bg-gray-700 transition no-round whitespace-nowrap">
+                        <i class="fas fa-trash-alt mr-1"></i> Terhapus
+                    </a>
+                @endif
+            @endif
+            @if (isset($createRoute) && request('status') !== 'terhapus')
+                <a href="{{ $createRoute }}" class="bg-primary text-white px-4 py-2.5 font-bold text-sm hover:bg-red-700 transition no-round whitespace-nowrap">
+                    <i class="fas fa-plus mr-2"></i> Tambah {{ $title }}
+                </a>
+            @endif
+        </div>
+    </div>
+
+    <div class="w-full">
+        <table class="w-full text-left table-fixed">
+            <thead>
+                <tr class="bg-gray-50 border-b-2 border-primary">
+                    <th class="p-3 text-xs font-bold uppercase tracking-wide text-gray-600 w-10">No</th>
+                    @foreach ($columns as $col)
+                        <th class="p-3 text-xs font-bold uppercase tracking-wide text-gray-600">{{ $col }}</th>
+                    @endforeach
+                    @if (!isset($hideActions) || !$hideActions)
+                    <th class="p-3 text-xs font-bold uppercase tracking-wide text-gray-600 text-center w-12"></th>
+                    @endif
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($rows as $i => $row)
+                    <tr class="border-b hover:bg-gray-50 transition {{ isset($row['trashed']) && $row['trashed'] ? 'bg-red-50' : '' }}">
+                        <td class="p-3 text-sm">{{ isset($paginator) ? $paginator->firstItem() + $i : $i + 1 }}</td>
+                        @foreach ($row['cells'] as $cell)
+                            <td class="p-3 text-sm break-words">{!! $cell !!}</td>
+                        @endforeach
+                        @if (!isset($hideActions) || !$hideActions)
+                        <td class="p-3 text-center">
+                            <div class="relative" x-data="{ open: false }">
+                                <button @click="open = !open" @click.outside="open = false" type="button"
+                                        class="text-gray-500 hover:text-dark transition p-2">
+                                    <i class="fas fa-ellipsis-vertical text-sm"></i>
+                                </button>
+                                <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+                                     class="absolute right-0 mt-1 w-44 bg-white border border-gray-200 shadow-lg z-20 no-round">
+                                    @if (isset($row['viewRoute']) && $row['viewRoute'])
+                                        <a href="{{ $row['viewRoute'] }}"
+                                           target="{{ $row['viewTarget'] ?? '_blank' }}"
+                                           rel="noopener noreferrer"
+                                           class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition">
+                                            <i class="fas fa-arrow-up-right-from-square w-4 text-center text-primary"></i> {{ $row['viewLabel'] ?? 'Tampilkan Detail' }}
+                                        </a>
+                                    @endif
+                                    @if (isset($row['copyUrl']) && $row['copyUrl'])
+                                        <button type="button" @click="navigator.clipboard.writeText(@js($row['copyUrl'])); open = false; $dispatch('notify', { message: @js($row['copySuccessMessage'] ?? 'Link berhasil disalin!') })"
+                                                class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition">
+                                            <i class="fas fa-link w-4 text-center text-blue-500"></i> {{ $row['copyLabel'] ?? 'Copy Link' }}
+                                        </button>
+                                    @endif
+                                    @if (isset($row['editRoute']))
+                                        <a href="{{ $row['editRoute'] }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition">
+                                            <i class="fas fa-edit w-4 text-center text-secondary"></i> Edit
+                                        </a>
+                                    @endif
+                                    @if (isset($row['deleteRoute']))
+                                        <button type="button" @click="open = false; $dispatch('confirm-action', { title: 'Hapus Data', message: 'Data yang dihapus dapat dipulihkan dari menu Terhapus.', action: '{{ $row['deleteRoute'] }}', method: 'DELETE' })"
+                                                class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition">
+                                            <i class="fas fa-trash w-4 text-center"></i> Hapus
+                                        </button>
+                                    @endif
+                                    @if (isset($row['restoreRoute']))
+                                        <button type="button" @click="open = false; $dispatch('confirm-action', { title: 'Pulihkan Data', message: 'Data akan dipulihkan ke daftar aktif.', action: '{{ $row['restoreRoute'] }}', method: 'PATCH', buttonText: 'Pulihkan', buttonColor: 'green' })"
+                                                class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-green-600 hover:bg-green-50 transition">
+                                            <i class="fas fa-undo w-4 text-center"></i> Pulihkan
+                                        </button>
+                                    @endif
+                                    @if (isset($row['forceDeleteRoute']))
+                                        <button type="button" @click="open = false; $dispatch('confirm-action', { title: 'Hapus Permanen', message: 'Data akan dihapus permanen dan tidak dapat dipulihkan kembali!', action: '{{ $row['forceDeleteRoute'] }}', method: 'DELETE', buttonText: 'Hapus Permanen' })"
+                                                class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition">
+                                            <i class="fas fa-trash-alt w-4 text-center"></i> Hapus Permanen
+                                        </button>
+                                    @endif
+                                </div>
+                            </div>
+                        </td>
+                        @endif
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="{{ count($columns) + (isset($hideActions) && $hideActions ? 1 : 2) }}" class="p-8 text-center text-gray-400 text-sm">
+                            <i class="fas fa-inbox text-2xl mb-3 block"></i>
+                            Belum ada data.
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    @if (isset($paginator) && $paginator->hasPages())
+        <div class="mt-6">
+            {{ $paginator->links('partials.dashboard-pagination') }}
+        </div>
+    @elseif (isset($paginator))
+        <div class="mt-6 text-sm text-gray-500">
+            <p>Menampilkan {{ $paginator->total() }} data</p>
+        </div>
+    @endif
+</div>

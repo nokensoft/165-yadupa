@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# =============================================================
+# setup — Laravel project setup helper
+# Usage:
+#   setup .env --db yalipapua --user root --password root
+#   setup .env -d yalipapua -u root -p root
+#   setup          (uses defaults from .env.example)
+# =============================================================
+
+DB_HOST="127.0.0.1"
+DB_PORT="3306"
+DB_NAME="laravel"
+DB_USER="root"
+DB_PASSWORD=""
+
+# ── Parse arguments ──────────────────────────────────────────
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        .env) shift ;;               # accept ".env" as a positional marker
+        --db|-d)       DB_NAME="$2";     shift 2 ;;
+        --user|-u)     DB_USER="$2";     shift 2 ;;
+        --password|-p) DB_PASSWORD="$2"; shift 2 ;;
+        --host)        DB_HOST="$2";     shift 2 ;;
+        --port)        DB_PORT="$2";     shift 2 ;;
+        *) shift ;;
+    esac
+done
+
+# ── Locate project root (directory containing artisan) ───────
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/artisan" ]; then
+    PROJECT_DIR="$SCRIPT_DIR"
+elif [ -f "$(pwd)/artisan" ]; then
+    PROJECT_DIR="$(pwd)"
+else
+    echo "[setup] ERROR: Cannot find Laravel project root (no artisan file)."
+    exit 1
+fi
+
+cd "$PROJECT_DIR" || exit 1
+
+# ── Create .env if missing ────────────────────────────────────
+if [ ! -f ".env" ]; then
+    cp .env.example .env
+    echo "[setup] .env created from .env.example"
+fi
+
+# ── Update DB settings in .env ────────────────────────────────
+# Switch connection to mysql
+sed -i "s|^DB_CONNECTION=.*|DB_CONNECTION=mysql|" .env
+
+# Replace commented-out or existing DB_* lines
+sed -i "s|^#\? *DB_HOST=.*|DB_HOST=${DB_HOST}|"         .env
+sed -i "s|^#\? *DB_PORT=.*|DB_PORT=${DB_PORT}|"         .env
+sed -i "s|^#\? *DB_DATABASE=.*|DB_DATABASE=${DB_NAME}|" .env
+sed -i "s|^#\? *DB_USERNAME=.*|DB_USERNAME=${DB_USER}|" .env
+sed -i "s|^#\? *DB_PASSWORD=.*|DB_PASSWORD=${DB_PASSWORD}|" .env
+
+echo ""
+echo "[setup] .env configured:"
+echo "        DB_CONNECTION = mysql"
+echo "        DB_HOST       = ${DB_HOST}"
+echo "        DB_PORT       = ${DB_PORT}"
+echo "        DB_DATABASE   = ${DB_NAME}"
+echo "        DB_USERNAME   = ${DB_USER}"
+echo "        DB_PASSWORD   = ${DB_PASSWORD:-<empty>}"
+echo ""
+
+# ── Run composer setup ────────────────────────────────────────
+echo "[setup] Running composer setup..."
+composer setup
