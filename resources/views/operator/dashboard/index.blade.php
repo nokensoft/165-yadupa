@@ -3,7 +3,7 @@
 @section('page-title', 'Dasbor')
 
 @section('content')
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    {{-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
 
         <div class="bg-white shadow-sm p-6 flex items-center space-x-4">
             <div class="w-14 h-14 bg-primary text-white flex items-center justify-center shrink-0">
@@ -75,7 +75,7 @@
             </div>
         </div>
 
-    </div>
+    </div> --}}
 
     
     
