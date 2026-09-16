@@ -15,10 +15,10 @@ class DashboardController extends Controller
         // tambah stats untu: foto, video, hero yang berstatus  bolen true/false, dan berita/pengumuman/agenda/infografis
         $stats = [
             // Hitung berdasarkan enum category pada tabel informasis
-            'berita'     => Informasi::where('category', 'Berita')->count(),
-            'pengumuman' => Informasi::where('category', 'Pengumuman')->count(),
-            'agenda'     => Informasi::where('category', 'Agenda')->count(),
-            'infografis' => Informasi::where('category', 'Infografis')->count(),
+            // 'berita'     => Informasi::where('category', 'Berita')->count(),
+            // 'pengumuman' => Informasi::where('category', 'Pengumuman')->count(),
+            // 'agenda'     => Informasi::where('category', 'Agenda')->count(),
+            // 'infografis' => Informasi::where('category', 'Infografis')->count(),
 
             // Stats dengan filter status boolean
             'foto'       => Photo::where('status', true)->count(),
