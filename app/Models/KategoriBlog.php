@@ -25,7 +25,7 @@ class KategoriBlog extends Model
 
     public function blog()
     {
-        return $this->hasMany(Blog::class, 'kategori_berita_id');
+        return $this->hasMany(Blog::class, 'kategori_blog_id');
     }
 
     public function berita()
