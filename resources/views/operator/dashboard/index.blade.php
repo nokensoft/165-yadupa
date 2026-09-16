@@ -10,7 +10,7 @@
                 <i class="fas fa-newspaper text-xl"></i>
             </div>
             <div>
-                <p class="text-3xl font-extrabold text-dark">{{ $stats['berita'] }}</p>
+                <p class="text-3xl font-extrabold text-dark">{{ $stats['berita'] ?? '' }}</p>
                 <p class="text-lg text-gray-500">Berita</p>
             </div>
         </div>
@@ -20,7 +20,7 @@
                 <i class="fas fa-bullhorn text-xl"></i>
             </div>
             <div>
-                <p class="text-3xl font-extrabold text-dark">{{ $stats['pengumuman'] }}</p>
+                <p class="text-3xl font-extrabold text-dark">{{ $stats['pengumuman'] ?? '' }}</p>
                 <p class="text-lg text-gray-500">Pengumuman</p>
             </div>
         </div>
@@ -30,7 +30,7 @@
                 <i class="fas fa-calendar-days text-xl"></i>
             </div>
             <div>
-                <p class="text-3xl font-extrabold text-dark">{{ $stats['agenda'] }}</p>
+                <p class="text-3xl font-extrabold text-dark">{{ $stats['agenda'] ?? '' }}</p>
                 <p class="text-lg text-gray-500">Agenda</p>
             </div>
         </div>
@@ -40,7 +40,7 @@
                 <i class="fas fa-chart-simple text-xl"></i>
             </div>
             <div>
-                <p class="text-3xl font-extrabold text-dark">{{ $stats['infografis'] }}</p>
+                <p class="text-3xl font-extrabold text-dark">{{ $stats['infografis'] ?? '' }}</p>
                 <p class="text-lg text-gray-500">Infografis</p>
             </div>
         </div>
@@ -50,7 +50,7 @@
                 <i class="fas fa-images text-xl"></i>
             </div>
             <div>
-                <p class="text-3xl font-extrabold text-dark">{{ $stats['foto'] }}</p>
+                <p class="text-3xl font-extrabold text-dark">{{ $stats['foto'] ?? '' }}</p>
                 <p class="text-lg text-gray-500">Foto</p>
             </div>
         </div>
@@ -60,7 +60,7 @@
                 <i class="fas fa-video text-xl"></i>
             </div>
             <div>
-                <p class="text-3xl font-extrabold text-dark">{{ $stats['video'] }}</p>
+                <p class="text-3xl font-extrabold text-dark">{{ $stats['video'] ?? '' }}</p>
                 <p class="text-lg text-gray-500">Video</p>
             </div>
         </div>
@@ -70,7 +70,7 @@
                 <i class="fas fa-image text-xl"></i>
             </div>
             <div>
-                <p class="text-3xl font-extrabold text-dark">{{ $stats['hero'] }}</p>
+                <p class="text-3xl font-extrabold text-dark">{{ $stats['hero'] ?? '' }}</p>
                 <p class="text-lg text-gray-500">Hero</p>
             </div>
         </div>
