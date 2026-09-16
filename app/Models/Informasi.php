@@ -11,10 +11,13 @@ class Informasi extends Model
 {
     use HasFactory, SoftDeletes;
 
+    // Tambahkan baris ini untuk mengarahkan ke tabel yang sudah di-rename
+    protected $table = 'blog_posts';
+
     protected $fillable = [
         'user_id',
         'title',
-        'category',
+        // 'category',
         'slug',
         'image',
         'content',

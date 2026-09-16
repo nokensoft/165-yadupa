@@ -84,7 +84,6 @@ class InformasiSeeder extends Seeder
                 [
                     'user_id'      => $userId,
                     'title'        => $data['title'],
-                    'category'     => 'Berita',
                     'image'        => $data['image'],
                     'content'      => $data['content'],
                     'status'       => true,
